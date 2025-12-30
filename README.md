@@ -1,167 +1,300 @@
-# PowerTrader_AI
-Fully automated crypto trading powered by a custom price prediction AI and a structured/tiered DCA system.
+<div align="center">
 
-“It’s an instance-based (kNN/kernel-style) predictor with online per-instance reliability weighting, used as a multi-timeframe trading signal.” - ChatGPT on the type of AI used in this trading bot.
+# 🤖 PowerTrader AI <a href="https://github.com/garagesteve1155/PowerTrader_AI" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 
-So what exactly does that mean?
+### <font color="orange">The Trading Bot That Thinks Like a Human <i>(But Faster)</i></font>
 
-When people think AI, they usually think about LLM style AIs and neural networks. What many people don't realize is there are many types of Artificial Intelligence and Machine Learning - and the one in my trading system falls under the "Other" category.
+</div>
 
-When training for a coin, it goes through the entire history for that coin on multiple timeframes and saves each pattern it sees, along with what happens on the next candle AFTER the pattern. It uses these saved patterns to generate a predicted candle by taking a weighted average of the closest matches in memory to the current pattern in time. This weighted average output is done once for each timeframe, from 1 hour up to 1 week. Each timeframe gets its own predicted candle. The low and high prices from these candles are what are shown as the blue and orange horizontal lines on the price charts. 
+<div align="center">
+  <button style="background-color: #329235ff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: default;">🪙 Fully Automated Crypto Trading</button> 
+  <button style="background-color: #2e8a8dff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: default;">🤖 Pattern-Matching Intelligence</button> 
+  <button style="background-color: #4c4eafff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: default;">🧠 Smart DCA</button>
+</div>
 
-After a candle closes, it checks what happened against what it predicted, and adjusts the weight for each "memory pattern" that was used to generate the weighted average, depending on how accurate each pattern was compared to what actually happened.
+<div align="center">
 
-Yes, it is EXTREMELY simple. Yes, it is STILL considered AI.
+[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge&logo=none)](https://github.com/garagesteve1155/PowerTrader_AI) [![Python](https://img.shields.io/badge/Python-3.10%2B-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://github.com/garagesteve1155/PowerTrader_AI) [![License](https://img.shields.io/badge/License-Apache%202.0-orange?style=for-the-badge)](https://github.com/garagesteve1155/PowerTrader_AI) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/garagesteve1155/PowerTrader_AI)
 
-Here is how the trading bot utilizes the price prediction ai to automatically make trades:
+<br>
 
-For determining when to start trades, the AI's Thinker script sends a signal to start a trade for a coin if the ask price for the coin drops below at least 3 of the the AI's predicted low prices for the coin (it predicts the currently active candle's high and low prices for each timeframe across all timeframes from 1hr to 1wk).
-
-For determining when to DCA, it uses either the current price level from the AI that is tied to the current amount of DCA buys that have been done on the trade (for example, right after a trade starts when 3 blue lines get crossed, its first DCA wont happen until the price crosses the 4th line, so on so forth), or it uses the hardcoded drawdown % for its current level, whichever it hits first. It allows a max of 2 DCAs within a rolling 24hr window to keep from dumping all of your money in too quickly on coins that are having an extended downtrend!
-
-For determining when to sell, the bot uses a trailing profit margin to maximize the potential gains. The margin line is set at either 5% gain if no DCA has happened on the trade, or 2.5% gain if any DCA has happened. The trailing margin gap is 0.5% (this is the amount the price has to go over the profit margin to begin raising the profit margin up to TRAIL after the price and maximize how much profit is gained once the price drops below the profit margin again and the bot sells the trade.
+## 🆚 Why This Bot is Different
 
 
-# Setup & First-Time Use (Windows)
+<br>
 
-THESE INSTRUCTIONS WERE WRITTEN BY AI! PLEASE LET ME KNOW IF THERE ARE ANY ERRORS OR ISSUES WITH THIS SETUP PROCESS!
+Most bots are "black boxes" or just guess based on RSI. **PowerTrader AI** is transparent.
 
-If you have any crypto holdings in Robinhood currently, either transfer them out of your Robinhood account or sell them to dollars BEFORE going through this setup process!
+</div>
 
-This page walks you through installing PowerTrader AI from start to finish, in the exact order a first-time user should do it.  
-No coding knowledge needed.  
-These instructions are Windows-based but PowerTrader AI can run on any OS.
+<div align="center">
+  <table align="center">
+    <tr>
+      <th align="center">❌ Typical Trading Bots</th>
+      <th align="center">✅ PowerTrader AI</th>
+    </tr>
+    <tr>
+      <td align="center">Complex Neural Networks (Black Box)</td>
+      <td align="center"><b>Pattern Recognition (Transparent)</b></td>
+    </tr>
+    <tr>
+      <td align="center">Expensive GPU Required</td>
+      <td align="center"><b>Runs on Any CPU</b></td>
+    </tr>
+    <tr>
+      <td align="center">"Trust me, bro" logic</td>
+      <td align="center"><b>"I've seen this pattern before" logic</b></td>
+    </tr>
+  </table>
+</div>
 
-**Important:** This software can place trades automatically. You are responsible for what it does.  
-Keep your API keys private. We are not giving financial advice. We are not responsible for any losses incurred. You are fully responsible for doing your own due diligence to learn and understand this trading system and to use it properly. You are fully responsible for all of your money, and any gains or losses.
+<div align="center">
 
----
+<br>
 
-## Step 1 — Install Python
+## 🧠 Core Philosophy: The "Perfect Memory"
 
-1. Go to **python.org** and download Python for Windows.
+</div>
+
+<br>
+
+> Imagine looking at a chart and saying: *"Hey, I've seen this exact pattern 50 times before. Usually, price goes up after this."*
+> 
+> That is exactly what PowerTrader AI does. 
+> 
+> It scans **every single candle in history** across multiple timeframes (1H to 1W) to find the closest matches to the current moment.
+
+<div align="center">
+
+<br>
+
+| ⏱️ Timeframe | 🔍 What It Sees |
+| :--- | :--- |
+| **1 Hour** | Short-term momentum shifts |
+| **4 Hours** | Intraday trend changes |
+| **1 Day** | Daily market cycles |
+| **1 Week** | Major trend reversals |
+
+<br>
+
+## ⚡ How It Actually Trades (The 3 Stages)
+
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+      <h1>🎯</h1>
+      <h3>Stage 1: Smart Entry</h3>
+      <p>The <b>Thinker</b> watches for "Oversold" signals on multiple timeframes.<br><br><b>The Rule:</b><br><code>LONG 3+</code> & <code>SHORT 0</code><br><br>We only buy when history says the odds are overwhelmingly in our favor.</p>
+    </td>
+    <td align="center" width="33%">
+      <h1>🛡️</h1>
+      <h3>Stage 2: Protective DCA</h3>
+      <p>If the market dips, we don't panic. We use a <b>Tiered DCA System</b>.<br><br><b>Triggers:</b><br>🔹 Crosses 4th/5th prediction line<br>🔹 Max Drawdown % hit<br><br>⚠️ <i>Max 2 DCAs per 24h safety lock.</i></p>
+    </td>
+    <td align="center" width="33%">
+      <h1>🚀</h1>
+      <h3>Stage 3: Trailing Profit</h3>
+      <p>We let winners run with a <b>Dynamic Trailing Stop</b>.<br><br><b>Targets:</b><br>🎯 5% (Standard)<br>🎯 2.5% (Recovery)<br><br>Once hit, a <b>0.5% trail</b> follows the price up!</p>
+    </td>
+  </tr>
+</table>
+
+
+<br>
+
+## 📦 Quick Start & Deep Dive
+
+<br>
+
+</div>
+
+<details>
+<summary><b>�️ Step 1: Installation & Prerequisites (Click to Expand)</b></summary>
+<br>
+
+### 1. Install Python
+1. Go to **python.org** and download Python for Windows (3.10 or newer).
 2. Run the installer.
-3. **Check the box** that says: **“Add Python to PATH”**.
+3. **CRITICAL:** Check the box that says: **“Add Python to PATH”**.
 4. Click **Install Now**.
 
----
+> **CRITICAL WARNING:** If you have any crypto holdings in your Robinhood account, you **MUST** either transfer them out or sell them to cash **BEFORE** using this bot.
+>
+> *Why?* The bot tracks performance based on your cash balance and its own trade history. Existing coins will confuse its logic. **Start with a clean slate (Cash Only).**
 
-## Step 2 — Download PowerTrader AI
+### 2. Get the Code
 
-1. Do not download the zip file of the repo! There is an issue I have to fix.
-2. Create a folder on your computer, like: `C:\PowerTraderAI\`
-3. On the PowerTrader_AI repo page, right click pt_hub.py and click "Save Link As..." and save it into the folder you just created.
-4. Repeat that for all files in the repo (except the readme and the license).
+> **Note:** Please download files manually for now. 
+> **Avoid "Download ZIP" due to a known GitHub structure quirk.**
 
----
+1. Create a folder: `C:\PowerTraderAI`
+2. Download `pt_hub.py` and all repo files into it.
 
-## Step 3 — Install PowerTrader AI (one command)
+### 3. Install Dependencies
+Open **Command Prompt** (`cmd`) and run:
 
-1. Open **Command Prompt** (Windows key → type **cmd** → Enter).
-2. Go into your PowerTrader AI folder. Example:
+```bash
+cd C:\PowerTraderAI
 
-   `cd C:\PowerTraderAI`
+# If using Python 3.12+, run this first to avoid distutils errors:
+python -m pip install setuptools
 
-3. If using Python 3.12 or higher, run this command:
+# Install bot requirements:
+python -m pip install -r requirements.txt
+```
 
-   `python -m pip install setuptools`
+### 4. Launch the Hub
+This is your command center.
+```bash
+python pt_hub.py
+```
 
-4. Install everything PowerTrader AI needs:
+</details>
 
-   `python -m pip install -r requirements.txt`
+<details>
+<summary><b>⚙️ Step 2: Configuration & Robinhood API Keys (Click to Expand)</b></summary>
+<br>
 
----
+Once the Hub is open, go to **Settings** and follow this exact sequence:
 
-## Step 4 — Start PowerTrader AI
+### 1. Basic Setup
+- **Main Neural Folder**: Set this to the folder containing `pt_hub.py` (e.g., `C:\PowerTraderAI`).
+- **Coins**: Select **BTC** to start.
 
-From the same Command Prompt window (inside your PowerTrader folder), run:
+> **Note on Folders:** PowerTrader uses a simple structure. **BTC** lives in the main folder, and any other coin you add (like ETH, DOGE) will automatically get its own subfolder created inside it.
 
-`python pt_hub.py`
+### 2. Robinhood API Setup
+*This connects the bot to your account safely.*
 
-The app that opens is the **PowerTrader Hub**.  
-This is the only thing you need to run day-to-day.
+1. Click **Robinhood API Setup** inside Settings.
+2. Click **Generate Keys**.
+3. **Copy the Public Key** shown in the wizard.
+4. Go to your **Robinhood Account** -> **Security** -> **API Keys**.
+5. Add a new key and paste the Public Key.
+6. **Important:** Enable "Trading" permissions when asked.
+7. Robinhood will show you an **API Key** (starts with `rh...`). Copy it.
+8. Paste it back into the bot's wizard and click **Save**.
+9. Close the wizard and click **SAVE** on the main Settings screen.
 
----
+> **Security Note:** Your keys are stored locally in `r_key.txt` and `r_secret.txt`. Keep these safe!
 
-## Step 5 — Set your folder, coins, and Robinhood keys (inside the Hub)
+</details>
 
-### Open Settings
+<details>
+<summary><b>🧠 Step 3: Training & Running the Bot (Click to Expand)</b></summary>
+<br>
 
-In the Hub, open **Settings** and do this in order:
+### The Workflow
+1. **Train All**: Click this button in the Hub.
+   - The AI scans the entire history of the selected coins.
+   - It builds a memory database of patterns.
+   - *Wait for this to finish.*
 
-- **Main Neural Folder**: set this to the same folder that contains `pt_hub.py` (recommended easiest).
-- **Choose which coins to trade**: start with **BTC**.
-- **While you are still in Settings**, click **Robinhood API Setup** and do this:
+2. **Start All**: Click this when training is complete.
+   - Launches `pt_thinker.py` (The Brain).
+   - Launches `pt_trader.py` (The Executioner).
 
-1. Click **Generate Keys**.
-2. Copy the **Public Key** shown in the wizard.
-3. On Robinhood, add a new API key and paste that Public Key.
-4. Set permissions to allow trading (the wizard tells you what to select).
-5. Robinhood will show your API Key (often starts with `rh`). Copy it.
-6. Paste the API Key back into the wizard and click **Save**.
-7. Close the wizard and go back to the **Settings** screen.
-8. **NOW** click **Save** in Settings.
+### Adding More Coins Later
+1. Open **Settings**.
+2. Add a new coin (e.g., ETH).
+3. **Save**.
+4. **Train All** again (it needs to learn the new coin's history).
+5. **Start All**.
 
-After saving, you will have two files in your PowerTrader AI folder:  
-`r_key.txt` and `r_secret.txt`  
-Keep them private.
+</details>
 
-PowerTrader AI uses a simple folder style:  
-**BTC uses the main folder**, and other coins use their own subfolders (like `ETH\`).
+<details>
+<summary><b>📈 Deep Dive: Understanding the Signals (Click to Expand)</b></summary>
+<br>
 
----
+### The "Instance-Based" Engine
+PowerTrader isn't a neural network in the traditional "black box" sense. It uses **kNN (k-Nearest Neighbors) with Reliability Weighting**.
 
-## Step 6 — Train (inside the Hub)
+- **Input:** It looks at the current candle pattern.
+- **Process:** It finds the top matches from history (1H to 1W timeframes).
+- **Prediction:** It calculates a weighted average of what happened *after* those matches.
+- **Visuals:** On the chart, you will see **Blue Lines (Predicted Lows)** and **Orange Lines (Predicted Highs)** for each timeframe.
+- **Feedback Loop:** After every candle close, it re-evaluates its past predictions and adjusts the weights of those memories.
 
-Training builds the system’s coin “memory” so it can generate signals.
+### Signal Strength Levels
+- **LONG 0-2**: Weak correlation. The AI sees some bullish patterns, but not enough to risk capital.
+- **LONG 3+ (THE TRIGGER):** **High Confidence.**
+  - *Technical Definition:* The current **Ask Price** has dropped *below* the **Predicted Low (Blue Line)** on at least 3 different timeframes simultaneously.
+  - *Meaning:* The asset is statistically oversold compared to historical patterns.
+- **SHORT 1+**: Bearish pressure detected. The bot will **never** buy if the Short signal is > 0.
 
-1. In the Hub, click **Train All**.
-2. Wait until training finishes.
+> **The Entry Rule:** `LONG >= 3` AND `SHORT == 0`
 
----
+</details>
 
-## Step 7 — Start the system (inside the Hub)
+<br>
 
-When training is done, click:
+<div align="center">
 
-1. **Start All**
+## ⚙️ Workflow Summary
 
-The Hub will:  
-**start pt_thinker.py**, wait until it is ready, then it will **start pt_trader.py**.  
-You don’t need to manually start separate programs. The hub handles everything!
+Once configured, your daily loop is simple!
 
----
+<table>
+  <tr>
+    <td align="center"><b>Step 1: Setup ⚙️</b></td>
+    <td align="center"><b>Step 2: Train 🧠</b></td>
+    <td align="center"><b>Step 3: Trade 🚀</b></td>
+  </tr>
+  <tr>
+    <td align="left">
+      Configure keys & coins.<br>
+      (One-time setup)
+    </td>
+    <td align="left">
+      Click <b>Train All</b>.<br>
+      Updates the "memory."
+    </td>
+    <td align="left">
+      Click <b>Start All</b>.<br>
+      Sit back and monitor.
+    </td>
+  </tr>
+</table>
 
-## Neural Levels (the LONG/SHORT numbers)
+<br>
 
-- These are signal strength levels from low to high.
-- Higher number = stronger signal.
-- LONG = buy-direction signal. SHORT = sell-direction signal.
+## 📊 The Neural Dashboard (Cheat Sheet)
 
-A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER WHILE HAVING A SHORT LEVEL OF 0!
+When you see the logs, here is what the signals mean:
 
----
+| Signal | Meaning | Action |
+| :--- | :--- | :--- |
+| 🟢 **LONG 0-2** | Weak buy signal | Wait ✋ |
+| 🟢 **LONG 3+** | Strong buy signal | **Ready to Buy** ✅ |
+| 🔴 **SHORT 1+** | Sell pressure detected | **Do Not Enter** 🚫 |
 
-## Adding more coins (later)
+ **The Golden Ticket 🎫 :** `LONG 3+` AND `SHORT 0` = 🚀 **TRADE EXECUTES**
 
-1. Open **Settings**
-2. Add one new coin
-3. Save
-4. Click **Train All**, wait for training to complete
-5. Click **Start All**
+<br>
 
----
+## ❤️ Support the Project
 
-## Donate
+<div align="center">
 
-PowerTrader AI is COMPLETELY free and open source! If you want to support the project:
+**PowerTrader AI is 100% Free & Open Source.**  
+*Made by garage coders, for garage coders.*
 
-- Cash App: **$garagesteve**
-- PayPal: **@garagesteve**
-- Patreon: **patreon.com/MakingMadeEasy**
+<br>
 
----
+<a href="https://cash.app/$garagesteve">
+  <img src="https://img.shields.io/badge/Cash_App-$garagesteve-00C244?style=for-the-badge&logo=cashapp&logoColor=white" height="40" />
+</a>&nbsp;
+<a href="https://paypal.me/garagesteve">
+  <img src="https://img.shields.io/badge/PayPal-@garagesteve-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="40" />
+</a>&nbsp;
+<a href="https://patreon.com/MakingMadeEasy">
+  <img src="https://img.shields.io/badge/Patreon-Join_the_Family-F96854?style=for-the-badge&logo=patreon&logoColor=white" height="40" />
+</a>
 
-## License
+<br>
+<br>
 
-PowerTrader AI is released under the **Apache 2.0** license.
+<sub>Released under the Apache 2.0 License.</sub>
+
+</div>
